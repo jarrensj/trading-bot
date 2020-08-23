@@ -1,0 +1,55 @@
+currentPrice = 
+lastSellPrice = 
+sharesHolding = 
+sharesLimit = 20
+noShares = true/false
+timeElapsed = 5 minutes 
+ticker = SPY 
+
+while ( 
+
+    // if the current price is less than the last price we sold at and we are not holding our max amount of shares, 
+    // then purchase a single share 
+
+    if (currentPrice < lastSellPrice && sharesHolding < sharesLimit) { 
+        noShares = false
+    }
+
+    purchasePriceAverage = getPurchasePriceAverage() API
+    currentPrice = getCurrentPrice() API 
+
+    // we are holding the max amount of shares and the current price is > than purchasPriceAverage 
+    // Sell 1/4 immediately
+    if (sharesHolding == sharesLimit && currentPRice > purchasePriceAverage) {
+        sell shares API 
+        update lastSellPrice
+        sharesHolding = getShareCount() API 
+    }
+
+
+    // if current price is > than the purchasePriceAverage but less than the lastPrice, 
+    // Then sell all shares and record time where I have no shares 
+    if (currentPrice > purchasePriceAverage && currentPrice < lastPrice)
+    { 
+        sell shares API 
+        updateLastSellPrice
+        
+        sharesHolding = getShareCount() API
+        if(!sharesHolding) {
+            noShares = true;
+            noSharesTime = currentTime API
+
+        }
+    }
+
+
+    // record the last current price  
+    lastPrice = currentPrice
+    
+    // if i do not hold any shares and certain time has elapsed 
+    // then buy 1/4 of max share limit 
+    if(!sharesHolding && currentTime + timeElapsed > noSharesTime) {
+        buyShares( 1/4 of total shares ) API
+        noShares = false;
+    }
+)
